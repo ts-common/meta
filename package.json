@@ -1,0 +1,34 @@
+{
+  "name": "@ts-common/meta",
+  "version": "0.0.0",
+  "description": "TypeScript metaprogramming",
+  "main": "dist/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "tsc",
+    "prepack": "npm install && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ts-common/meta.git"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.map",
+    "dist/index.d.ts.map",
+    "src/index.ts"
+  ],
+  "keywords": [
+    "metaprogramming"
+  ],
+  "author": "Sergey Shandar",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ts-common/meta/issues"
+  },
+  "homepage": "https://github.com/ts-common/meta#readme",
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}
