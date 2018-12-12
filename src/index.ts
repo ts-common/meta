@@ -11,4 +11,7 @@ export type IsEqual<A, B> =
 
 export const isEqual = <A, B>(_true: IsEqual<A, B>) => {}
 
-export type Property<B, T extends B, K extends keyof B> = K extends keyof T ? T[K] : B[K]
+export type NotUndefined<T> = T extends undefined ? never : T
+
+export type Property<B, T extends B, K extends keyof B> =
+  NotUndefined<K extends keyof T ? T[K] : B[K]>
