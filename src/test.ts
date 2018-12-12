@@ -15,5 +15,5 @@ index.isEqual<
 type A = { readonly a?: true, readonly b?: true }
 type B = { readonly b: true }
 
-index.isEqual<index.Property<A, B, "a">, undefined>(true)
+index.isEqual<index.Property<A, B, "a">, undefined|true>(true)
 index.isEqual<index.Property<A, B, "b">, true>(true)

@@ -1,6 +1,6 @@
 {
   "name": "@ts-common/meta",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "TypeScript metaprogramming",
   "main": "dist/index.js",
   "scripts": {
