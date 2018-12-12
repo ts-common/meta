@@ -15,3 +15,6 @@ export type NotUndefined<T> = T extends undefined ? never : T
 
 export type Property<B, T extends B, K extends keyof B, D extends B[K] = B[K]> =
   NotUndefined<K extends keyof T ? T[K] : D>
+
+export type ArrayItem<T extends ReadonlyArray<unknown>> =
+  T extends ReadonlyArray<infer U> ? U : never

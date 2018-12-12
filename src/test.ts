@@ -19,3 +19,5 @@ index.isEqual<index.Property<A, B, "a">, true>(true)
 index.isEqual<index.Property<A, B, "b">, true>(true)
 index.isEqual<index.Property<A, B, "c">, boolean>(true)
 index.isEqual<index.Property<A, B, "c", false>, false>(true)
+
+index.isEqual<index.ArrayItem<["A", "B"]>, "A"|"B">(true)
