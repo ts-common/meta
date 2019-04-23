@@ -11,6 +11,10 @@ index.isEqual<
   { readonly [K in string]: number|undefined },
   { readonly [K in string]?: number } & object
 >(true)
+index.isEqual<
+  { readonly [K: string]: null|undefined },
+  { readonly [K: string]: null|undefined }
+>(true)
 
 type A = { readonly a?: true, readonly b?: true, readonly c?: boolean }
 type B = { readonly b: true }

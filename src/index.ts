@@ -4,10 +4,16 @@ export type IsNever<T> = _IsEqual<T, never>
 
 export const isNever = <A>(_true: IsNever<A>) => {}
 
+/*
 export type IsEqual<A, B> =
   _IsEqual<A, B> extends false ? false :
   _IsEqual<keyof A, keyof B> extends false ? false :
   true
+*/
+
+export type IsEqual<A, B> =
+  IsNever<A> extends true ? IsNever<B> extends true ? true : false :
+  A extends B ? B extends A ? true : false : false
 
 export const isEqual = <A, B>(_true: IsEqual<A, B>) => {}
 
