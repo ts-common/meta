@@ -25,3 +25,21 @@ index.isEqual<index.Property<A, B, "c">, boolean>(true)
 index.isEqual<index.Property<A, B, "c", false>, false>(true)
 
 index.isEqual<index.ArrayItem<["A", "B"]>, "A"|"B">(true)
+
+index.isEqual<object, object>(true)
+
+type XNull = { readonly [K in string]?: null }
+type XString = { readonly [K in string]?: string }
+
+type ONull = XNull & object
+type OString = XString & object
+
+type Properties<T> = { readonly [K in keyof T]: T[K] }
+
+index.isEqual<XNull, XString>(false)
+index.isEqual<ONull, OString>(true) // should be false
+
+type PNull = Properties<ONull>
+type PString = Properties<OString>
+
+index.isEqual<PNull, PString>(true) // should be false

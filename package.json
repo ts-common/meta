@@ -1,6 +1,6 @@
 {
   "name": "@ts-common/meta",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "TypeScript metaprogramming",
   "main": "dist/index.js",
   "scripts": {
@@ -29,6 +29,6 @@
   },
   "homepage": "https://github.com/ts-common/meta#readme",
   "devDependencies": {
-    "typescript": "^3.4.4"
+    "typescript": "^3.4.5"
   }
 }

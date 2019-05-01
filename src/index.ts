@@ -1,8 +1,18 @@
-export type _IsEqual<A, B> = A | B extends A & B ? true : false
+// export type _IsEqual<A, B> = [A | B] extends [A & B] ? true : false
 
-export type IsNever<T> = _IsEqual<T, never>
+export type IsNever<T> = IsEqual<T, never>
 
 export const isNever = <A>(_true: IsNever<A>) => {}
+
+/*
+export type IsEqual<A, B> =
+  Subset<A, B> extends false ? false :
+  Subset<B, A> extends false ? false :
+  true
+*/
+
+export type IsEqual<A, B> =
+  A | B extends A & B ? true : false
 
 /*
 export type IsEqual<A, B> =
@@ -11,9 +21,11 @@ export type IsEqual<A, B> =
   true
 */
 
+/*
 export type IsEqual<A, B> =
   IsNever<A> extends true ? IsNever<B> extends true ? true : false :
   A extends B ? B extends A ? true : false : false
+*/
 
 export const isEqual = <A, B>(_true: IsEqual<A, B>) => {}
 
