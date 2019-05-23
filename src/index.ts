@@ -1,8 +1,14 @@
-// export type _IsEqual<A, B> = [A | B] extends [A & B] ? true : false
-
 export type IsNever<T> = IsEqual<T, never>
 
 export const isNever = <A>(_true: IsNever<A>) => {}
+
+/**
+ * The meta-function can't handle types that's merged with `object`.
+ */
+export type IsEqual<A, B> =
+  A | B extends A & B ? true : false
+
+// export type _IsEqual<A, B> = [A | B] extends [A & B] ? true : false
 
 /*
 export type IsEqual<A, B> =
@@ -10,9 +16,6 @@ export type IsEqual<A, B> =
   Subset<B, A> extends false ? false :
   true
 */
-
-export type IsEqual<A, B> =
-  A | B extends A & B ? true : false
 
 /*
 export type IsEqual<A, B> =
@@ -36,3 +39,39 @@ export type Property<B, T extends B, K extends keyof B, D extends B[K] = B[K]> =
 
 export type ArrayItem<T extends readonly unknown[]> =
   T extends readonly (infer U)[] ? U : never
+
+export type EnumSchema = { readonly enum: readonly string[] }
+
+export type FromSchema<T extends EnumSchema> = ArrayItem<T['enum']>
+
+export type EnumInfo<T extends EnumSchema> = { readonly [k in FromSchema<T>]: k }
+
+const enumInfoFromArray = <T extends string>(a: readonly T[]): { readonly [k in T]: k } => {
+  const result: { [k in T]?: k } = {}
+  for (const i of a) {
+    result[i] = i
+  }
+  return result as { readonly [k in T]: k }
+}
+
+export const enumInfo = <T extends { readonly enum: readonly FromSchema<T>[] }>(schema: T): EnumInfo<T> => {
+  type E = FromSchema<T>
+  const result: { [k in E]?: k } = {}
+  for (const i of schema.enum) {
+    result[i] = i
+  }
+  return result as { readonly [k in E]: k }
+}
+
+const myEnumSchema = {
+  enum: [
+    "A",
+    "B"
+  ]
+} as const
+
+export type MyEnum = FromSchema<typeof myEnumSchema>
+
+export const myEnumInfo = enumInfo(myEnumSchema)
+
+export const x = myEnumInfo.A
