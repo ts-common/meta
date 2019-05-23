@@ -40,19 +40,13 @@ export type Property<B, T extends B, K extends keyof B, D extends B[K] = B[K]> =
 export type ArrayItem<T extends readonly unknown[]> =
   T extends readonly (infer U)[] ? U : never
 
+//
+
 export type EnumSchema = { readonly enum: readonly string[] }
 
 export type FromSchema<T extends EnumSchema> = ArrayItem<T['enum']>
 
 export type EnumInfo<T extends EnumSchema> = { readonly [k in FromSchema<T>]: k }
-
-const enumInfoFromArray = <T extends string>(a: readonly T[]): { readonly [k in T]: k } => {
-  const result: { [k in T]?: k } = {}
-  for (const i of a) {
-    result[i] = i
-  }
-  return result as { readonly [k in T]: k }
-}
 
 export const enumInfo = <T extends { readonly enum: readonly FromSchema<T>[] }>(schema: T): EnumInfo<T> => {
   type E = FromSchema<T>
@@ -62,6 +56,8 @@ export const enumInfo = <T extends { readonly enum: readonly FromSchema<T>[] }>(
   }
   return result as { readonly [k in E]: k }
 }
+
+//
 
 const myEnumSchema = {
   enum: [
